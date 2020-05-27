@@ -7,7 +7,7 @@ common=dict(
     basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
     port = 9887,
     serverurl = "http://localhost:9887",
-    busiServer = "http://localhost:9006"
+    busiServer = "http://localhost:9888"
 )
 common['static'] = os.path.join(common['basedir'],"static")
 common['images'] = os.path.join(common['static'],"images")
