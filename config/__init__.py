@@ -5,8 +5,8 @@ common=dict(
     gzip = 'on',
     debug = False,
     basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    port = 9888,
-    serverurl = "http://localhost:9888",
+    port = 9887,
+    serverurl = "http://localhost:9887",
     busiServer = "http://localhost:9006"
 )
 common['static'] = os.path.join(common['basedir'],"static")
