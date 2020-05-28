@@ -12,7 +12,7 @@ class Follow(BaseHandler):
 
         ut = UtilTime()
 
-        runTime = ut.today.shift(seconds=10)
+        runTime = ut.today.shift(seconds=5)
 
         for item in self.data['obj']['listids']:
             print(runTime.datetime)
@@ -29,6 +29,11 @@ class Follow(BaseHandler):
                         }
                     }
                 })
-            runTime = runTime.shift(hours=self.data['obj']['sendlimit'])
+            if self.data['obj']['sendlimit'].split(",")[1] == 'H':
+                runTime = runTime.shift(hours=self.data['obj']['sendlimit'])
+            elif self.data['obj']['sendlimit'].split(",")[1] == 'M':
+                runTime = runTime.shift(minutes=self.data['obj']['sendlimit'])
+            elif self.data['obj']['sendlimit'].split(",")[1] == 'S':
+                runTime = runTime.shift(seconds=self.data['obj']['sendlimit'])
 
         return None
