@@ -3,7 +3,10 @@ from apps.base import BaseHandler
 from utils.time_st import UtilTime
 from utils.decorator.connector import Core_connector
 
-from apps.task.task import follow_run,reply_run
+from apps.task.task import follow_run,reply_run,msgcustomer_run
+
+from models.task import AccMsgCustomer
+from utils.exceptions import PubErrorCustom
 
 class Follow(BaseHandler):
 
@@ -129,3 +132,50 @@ class Reply(BaseHandler):
                                    })
 
         return None
+
+class MsgCustomer(BaseHandler):
+
+    @Core_connector(isTransaction=True,isTicket=False)
+    async def post(self, *args, **kwargs):
+        try:
+            obj = await self.db.get(AccMsgCustomer,id=self.data['id'])
+        except AccMsgCustomer.DoesNotExist:
+            raise PubErrorCustom("拒绝访问!")
+
+        self.scheduler.add_job(msgcustomer_run(), 'date',
+                               run_date=UtilTime().timestamp_to_arrow(obj.sendtime).datetime,
+                               id='MsgCustomer_Job_{}'.format(obj.id),
+                               kwargs={
+                                   "url": "{}/v1/api/wechat/AccMsgCustomer_Send".format(
+                                       self.application.settings.get("busiServer")),
+                                   "data": {
+                                       "data": {
+                                           "id": obj.id,
+                                       }
+                                   }
+                               })
+
+    @Core_connector(isTransaction=True,isTicket=False)
+    async def put(self, *args, **kwargs):
+        try:
+            obj = await self.db.get(AccMsgCustomer,id=self.data['id'])
+        except AccMsgCustomer.DoesNotExist:
+            raise PubErrorCustom("拒绝访问!")
+
+        self.scheduler.remove_job('MsgCustomer_Job_{}'.format(obj.id))
+        self.scheduler.add_job(msgcustomer_run(), 'date',
+                               run_date=UtilTime().timestamp_to_arrow(obj.sendtime).datetime,
+                               id='MsgCustomer_Job_{}'.format(obj.id),
+                               kwargs={
+                                   "url": "{}/v1/api/wechat/AccMsgCustomer_Send".format(
+                                       self.application.settings.get("busiServer")),
+                                   "data": {
+                                       "data": {
+                                           "id": obj.id,
+                                       }
+                                   }
+                               })
+
+    @Core_connector(isTransaction=True,isTicket=False)
+    async def delete(self, *args, **kwargs):
+        self.scheduler.remove_job('MsgCustomer_Job_{}'.format(self.data['id']))

@@ -1,7 +1,7 @@
 
 import json
 from tasks.cp import CpTaskBase
-from models.cp import Cp
+from models.task import Cp
 from loguru import logger
 
 def add_task(scheduler=None):
@@ -41,7 +41,7 @@ def add_task(scheduler=None):
 
 if __name__ == '__main__':
     import sys,os
-    from models.cp import Cp
+    from models.task import Cp
     PROJECT_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir)
     if PROJECT_PATH not in sys.path:
         sys.path.insert(0, PROJECT_PATH)

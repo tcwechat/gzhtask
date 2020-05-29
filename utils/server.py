@@ -6,7 +6,7 @@ from tornado.options import options
 
 from apscheduler.schedulers.tornado import TornadoScheduler
 
-# from utils.database import RedisPoolSync,MysqlPoolSync
+from utils.database import MysqlPoolSync
 from loguru import logger
 from router import urlpattern
 from config import common
@@ -30,10 +30,10 @@ class Server(object):
         apps = tornado.web.Application(handlers=urlpattern,default_host=None,transforms=None,**common)
 
         # #初始化redis
-        # apps.redis = RedisPoolSync().get_conn()
+        # apps.redis = RedisPool(loop=loop).get_conn()
         #
-        # #初始化mysql
-        # apps.mysql = MysqlPoolSync().get_conn
+        #初始化mysql
+        apps.mysql = MysqlPoolSync().get_conn
 
         return apps
 

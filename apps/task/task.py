@@ -15,3 +15,9 @@ def reply_run(**kwargs):
     response = request(method="POST",url=kwargs.get('url'),json=kwargs.get("data"))
 
     logger.info(response.text)
+
+def msgcustomer_run(**kwargs):
+
+    response = request(method="POST",url=kwargs.get('url'),json=kwargs.get("data"))
+
+    logger.info(response.text)

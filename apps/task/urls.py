@@ -7,6 +7,7 @@ api_url = join_url(api_base_url,"/task")
 urlpattern = [
     url(join_url(api_url, '/follow'), Follow),
     url(join_url(api_url, '/reply'), Reply),
+    url(join_url(api_url, '/msgcustomer'), MsgCustomer),
 ]
 
 print(api_url)

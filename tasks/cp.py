@@ -4,7 +4,7 @@ from requests import request
 from bs4 import BeautifulSoup
 from loguru import logger
 from utils.time_st import UtilTime
-from models.cp import Cp,CpTermList,CpTermListHistory
+from models.task import Cp,CpTermList,CpTermListHistory
 from utils.database.mysql import MysqlPoolSync
 
 """    
