@@ -29,3 +29,36 @@ class AccMsgCustomer(BaseModel):
 
     class Meta:
         db_table = 'accmsgcustomer'
+
+
+class AccMsgMould(BaseModel):
+    """
+    模板消息表
+    """
+
+    id = BigAutoField(primary_key=True)
+    accid = BigAutoField(verbose_name="公众号ID")
+    name = CharField(max_length=60,default="",verbose_name="消息名称")
+    mould_id = CharField(max_length=60,verbose_name="模板ID",default="")
+    mould_name = CharField(max_length=60,default="",verbose_name="模板名称")
+    mould_data = CharField(max_length=1024,default="{}",verbose_name="模板数据")
+    mould_skip = CharField(max_length=255,verbose_name="跳转",default="")
+    sendtime = BigIntegerField(default=0, verbose_name="发送时间")
+    send_count = IntegerField(verbose_name="发送人数", default=0)
+    status = CharField(max_length=1,verbose_name="""
+                                            发送状态
+                                                '0'-已发送,
+                                                '1'-未发送,
+                                                '2'-发送中,
+                                                '3'-发送终止,
+                                                '4'-发送失败
+                                            """,default='1')
+
+    type = CharField(max_length=1, verbose_name="群发粉丝 '0'-全部,'1'-选择标签,'2'-选择性别")
+    select_sex = CharField(max_length=1,verbose_name="条件筛选->性别,值为1时是男性，值为2时是女性，值为0时是未知")
+    select_tags = CharField(max_length=1024,verbose_name="条件筛选->标签集合",default="[]")
+
+    createtime = BigIntegerField(default=0)
+
+    class Meta:
+        db_table = 'accmsgmould'

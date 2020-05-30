@@ -8,6 +8,7 @@ urlpattern = [
     url(join_url(api_url, '/follow'), Follow),
     url(join_url(api_url, '/reply'), Reply),
     url(join_url(api_url, '/msgcustomer'), MsgCustomer),
+    url(join_url(api_url, '/msgmould'), MsgMould),
 ]
 
 print(api_url)
