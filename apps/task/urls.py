@@ -9,6 +9,7 @@ urlpattern = [
     url(join_url(api_url, '/reply'), Reply),
     url(join_url(api_url, '/msgcustomer'), MsgCustomer),
     url(join_url(api_url, '/msgmould'), MsgMould),
+    url(join_url(api_url, '/msgmass'), MsgMass),
 ]
 
 print(api_url)
