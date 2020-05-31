@@ -37,7 +37,7 @@ class AccMsgMould(BaseModel):
     """
 
     id = BigAutoField(primary_key=True)
-    accid = BigAutoField(verbose_name="公众号ID")
+    accid = BigIntegerField(verbose_name="公众号ID")
     name = CharField(max_length=60,default="",verbose_name="消息名称")
     mould_id = CharField(max_length=60,verbose_name="模板ID",default="")
     mould_name = CharField(max_length=60,default="",verbose_name="模板名称")
