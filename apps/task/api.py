@@ -55,7 +55,9 @@ class Reply(BaseHandler):
         logger.info(start)
         logger.info(ut.arrow_to_string(format_v="HH:mm"))
         logger.info(end)
-        if start <= ut.arrow_to_string(format_v="HH:mm") <= end:
+        s=ut.arrow_to_string(format_v="HH:mm")
+        if start <= s <= end:
+            logger.info("处于安静时间{},{}".format(self.data['obj']['quiet']),s)
             return None
         else:
             pass
