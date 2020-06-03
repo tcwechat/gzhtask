@@ -83,7 +83,8 @@ class Reply(BaseHandler):
                                                "listids": self.data['obj']['listids'],
                                                "nickname": self.data.get("nickname"),
                                                "openid": self.data.get("openid"),
-                                               "accid": self.data.get("accid")
+                                               "accid": self.data.get("accid"),
+                                               "createtime":createtime.timestamp
                                            }
                                        }
                                    })
@@ -103,7 +104,8 @@ class Reply(BaseHandler):
                                                    "listids": [item],
                                                    "nickname": self.data.get("nickname"),
                                                    "openid": self.data.get("openid"),
-                                                   "accid": self.data.get("accid")
+                                                   "accid": self.data.get("accid"),
+                                                   "createtime": createtime.timestamp
                                                }
                                            }
                                        })
@@ -126,7 +128,8 @@ class Reply(BaseHandler):
                                                "listids": self.data['obj']['listids'],
                                                "nickname": self.data.get("nickname"),
                                                "openid": self.data.get("openid"),
-                                               "accid": self.data.get("accid")
+                                               "accid": self.data.get("accid"),
+                                               "createtime": createtime.timestamp
                                            }
                                        }
                                    })
