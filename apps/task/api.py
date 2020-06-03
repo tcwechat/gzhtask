@@ -7,6 +7,7 @@ from apps.task.task import follow_run,reply_run,msgcustomer_run,msgmould_run,msg
 
 from models.task import AccMsgCustomer,AccMsgMould,AccMsgMass
 from utils.exceptions import PubErrorCustom
+from loguru import logger
 
 class Follow(BaseHandler):
 
@@ -51,9 +52,9 @@ class Reply(BaseHandler):
         start = self.data['obj']['quiet'].split("-")[0]
         end = self.data['obj']['quiet'].split("-")[0]
 
-        print(start)
-        print(ut.arrow_to_string(format_v="HH:mm"))
-        print(end)
+        logger.info(start)
+        logger.info(ut.arrow_to_string(format_v="HH:mm"))
+        logger.info(end)
         if start <= ut.arrow_to_string(format_v="HH:mm") <= end:
             return None
         else:
