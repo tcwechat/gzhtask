@@ -59,7 +59,7 @@ class Reply(BaseHandler):
         t = self.data['obj']['nosend_limit'].split(',')[0]
         u = self.data['obj']['nosend_limit'].split(',')[1]
 
-        createtime = ut.timestamp_to_arrow(self.data['obj']['createtime'])
+        createtime = ut.today
 
         if u == 'H':
             runTime = createtime.shift(hours=int(t))
