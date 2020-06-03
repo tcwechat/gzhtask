@@ -51,6 +51,9 @@ class Reply(BaseHandler):
         start = self.data['obj']['quiet'].split("-")[0]
         end = self.data['obj']['quiet'].split("-")[0]
 
+        print(start)
+        print(ut.arrow_to_string(format_v="HH:mm"))
+        print(end)
         if start <= ut.arrow_to_string(format_v="HH:mm") <= end:
             return None
         else:
