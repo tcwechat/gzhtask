@@ -50,7 +50,7 @@ class Reply(BaseHandler):
         ut = UtilTime()
 
         start = self.data['obj']['quiet'].split("-")[0]
-        end = self.data['obj']['quiet'].split("-")[0]
+        end = self.data['obj']['quiet'].split("-")[1]
 
         logger.info(start)
         logger.info(ut.arrow_to_string(format_v="HH:mm"))
