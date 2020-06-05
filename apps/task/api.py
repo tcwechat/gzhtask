@@ -5,7 +5,6 @@ from utils.decorator.connector import Core_connector
 
 from apps.task.task import follow_run,reply_run,msgcustomer_run,msgmould_run,msgmass_run
 
-from models.task import AccMsgCustomer,AccMsgMould,AccMsgMass
 from utils.exceptions import PubErrorCustom
 from loguru import logger
 
@@ -150,7 +149,7 @@ class MsgCustomer(BaseHandler):
 
         obj = self.data['obj']
 
-        self.scheduler.add_job(msgcustomer_run(), 'date',
+        self.scheduler.add_job(msgcustomer_run, 'date',
                                run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
                                id='MsgCustomer_Job_{}'.format(obj['id']),
                                kwargs={
@@ -169,7 +168,7 @@ class MsgCustomer(BaseHandler):
         obj = self.data['obj']
 
         self.scheduler.remove_job('MsgCustomer_Job_{}'.format(obj['id']))
-        self.scheduler.add_job(msgcustomer_run(), 'date',
+        self.scheduler.add_job(msgcustomer_run, 'date',
                                run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
                                id='MsgCustomer_Job_{}'.format(obj['id']),
                                kwargs={
@@ -193,7 +192,7 @@ class MsgMould(BaseHandler):
 
         obj = self.data['obj']
 
-        self.scheduler.add_job(msgmould_run(), 'date',
+        self.scheduler.add_job(msgmould_run, 'date',
                                run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
                                id='MsgMould_Job_{}'.format(obj['id']),
                                kwargs={
@@ -212,7 +211,7 @@ class MsgMould(BaseHandler):
         obj = self.data['obj']
 
         self.scheduler.remove_job('MsgMould_Job_{}'.format(obj['id']))
-        self.scheduler.add_job(msgmould_run(), 'date',
+        self.scheduler.add_job(msgmould_run, 'date',
                                run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
                                id='MsgMould_Job_{}'.format(obj['id']),
                                kwargs={
@@ -237,7 +236,7 @@ class MsgMass(BaseHandler):
 
         obj = self.data['obj']
 
-        self.scheduler.add_job(msgmass_run(), 'date',
+        self.scheduler.add_job(msgmass_run, 'date',
                                run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
                                id='MsgMass_Job_{}'.format(obj['id']),
                                kwargs={
@@ -256,7 +255,7 @@ class MsgMass(BaseHandler):
         obj = self.data['obj']
 
         self.scheduler.remove_job('MsgMass_Job_{}'.format(obj['id']))
-        self.scheduler.add_job(msgmass_run(), 'date',
+        self.scheduler.add_job(msgmass_run, 'date',
                                run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
                                id='MsgMass_Job_{}'.format(obj['id']),
                                kwargs={
