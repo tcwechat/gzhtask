@@ -141,43 +141,43 @@ class Reply(BaseHandler):
 
 class MsgCustomer(BaseHandler):
 
-    @Core_connector(isTransaction=True,isTicket=False)
+    @Core_connector(isTicket=False)
     async def post(self, *args, **kwargs):
-        try:
-            obj = await self.db.get(AccMsgCustomer,id=self.data['id'])
-        except AccMsgCustomer.DoesNotExist:
-            raise PubErrorCustom("拒绝访问!")
+        # try:
+        #     obj = await self.db.get(AccMsgCustomer,id=self.data['id'])
+        # except AccMsgCustomer.DoesNotExist:
+        #     raise PubErrorCustom("拒绝访问!")
+
+        obj = self.data['obj']
 
         self.scheduler.add_job(msgcustomer_run(), 'date',
-                               run_date=UtilTime().timestamp_to_arrow(obj.sendtime).datetime,
-                               id='MsgCustomer_Job_{}'.format(obj.id),
+                               run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
+                               id='MsgCustomer_Job_{}'.format(obj['id']),
                                kwargs={
                                    "url": "{}/v1/api/wechat/AccMsgCustomer_Send".format(
                                        self.application.settings.get("busiServer")),
                                    "data": {
                                        "data": {
-                                           "id": obj.id,
+                                           "id": obj['id'],
                                        }
                                    }
                                })
 
-    @Core_connector(isTransaction=True,isTicket=False)
+    @Core_connector(isTicket=False)
     async def put(self, *args, **kwargs):
-        try:
-            obj = await self.db.get(AccMsgCustomer,id=self.data['id'])
-        except AccMsgCustomer.DoesNotExist:
-            raise PubErrorCustom("拒绝访问!")
 
-        self.scheduler.remove_job('MsgCustomer_Job_{}'.format(obj.id))
+        obj = self.data['obj']
+
+        self.scheduler.remove_job('MsgCustomer_Job_{}'.format(obj['id']))
         self.scheduler.add_job(msgcustomer_run(), 'date',
-                               run_date=UtilTime().timestamp_to_arrow(obj.sendtime).datetime,
-                               id='MsgCustomer_Job_{}'.format(obj.id),
+                               run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
+                               id='MsgCustomer_Job_{}'.format(obj['id']),
                                kwargs={
                                    "url": "{}/v1/api/wechat/AccMsgCustomer_Send".format(
                                        self.application.settings.get("busiServer")),
                                    "data": {
                                        "data": {
-                                           "id": obj.id,
+                                           "id": obj['id'],
                                        }
                                    }
                                })
@@ -190,41 +190,37 @@ class MsgMould(BaseHandler):
 
     @Core_connector(isTransaction=True,isTicket=False)
     async def post(self, *args, **kwargs):
-        try:
-            obj = await self.db.get(AccMsgMould,id=self.data['id'])
-        except AccMsgCustomer.DoesNotExist:
-            raise PubErrorCustom("拒绝访问!")
+
+        obj = self.data['obj']
 
         self.scheduler.add_job(msgmould_run(), 'date',
-                               run_date=UtilTime().timestamp_to_arrow(obj.sendtime).datetime,
-                               id='MsgMould_Job_{}'.format(obj.id),
+                               run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
+                               id='MsgMould_Job_{}'.format(obj['id']),
                                kwargs={
                                    "url": "{}/v1/api/wechat/AccMsgMould_Send".format(
                                        self.application.settings.get("busiServer")),
                                    "data": {
                                        "data": {
-                                           "id": obj.id,
+                                           "id": obj['id'],
                                        }
                                    }
                                })
 
     @Core_connector(isTransaction=True,isTicket=False)
     async def put(self, *args, **kwargs):
-        try:
-            obj = await self.db.get(AccMsgMould,id=self.data['id'])
-        except AccMsgCustomer.DoesNotExist:
-            raise PubErrorCustom("拒绝访问!")
 
-        self.scheduler.remove_job('MsgMould_Job_{}'.format(obj.id))
+        obj = self.data['obj']
+
+        self.scheduler.remove_job('MsgMould_Job_{}'.format(obj['id']))
         self.scheduler.add_job(msgmould_run(), 'date',
-                               run_date=UtilTime().timestamp_to_arrow(obj.sendtime).datetime,
-                               id='MsgMould_Job_{}'.format(obj.id),
+                               run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
+                               id='MsgMould_Job_{}'.format(obj['id']),
                                kwargs={
                                    "url": "{}/v1/api/wechat/AccMsgMould_Send".format(
                                        self.application.settings.get("busiServer")),
                                    "data": {
                                        "data": {
-                                           "id": obj.id,
+                                           "id": obj['id'],
                                        }
                                    }
                                })
@@ -238,41 +234,37 @@ class MsgMass(BaseHandler):
 
     @Core_connector(isTransaction=True,isTicket=False)
     async def post(self, *args, **kwargs):
-        try:
-            obj = await self.db.get(AccMsgMass,id=self.data['id'])
-        except AccMsgCustomer.DoesNotExist:
-            raise PubErrorCustom("拒绝访问!")
+
+        obj = self.data['obj']
 
         self.scheduler.add_job(msgmass_run(), 'date',
-                               run_date=UtilTime().timestamp_to_arrow(obj.sendtime).datetime,
-                               id='MsgMass_Job_{}'.format(obj.id),
+                               run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
+                               id='MsgMass_Job_{}'.format(obj['id']),
                                kwargs={
                                    "url": "{}/v1/api/wechat/AccMsgMass_Send".format(
                                        self.application.settings.get("busiServer")),
                                    "data": {
                                        "data": {
-                                           "id": obj.id,
+                                           "id": obj['id'],
                                        }
                                    }
                                })
 
     @Core_connector(isTransaction=True,isTicket=False)
     async def put(self, *args, **kwargs):
-        try:
-            obj = await self.db.get(AccMsgMass,id=self.data['id'])
-        except AccMsgCustomer.DoesNotExist:
-            raise PubErrorCustom("拒绝访问!")
 
-        self.scheduler.remove_job('MsgMass_Job_{}'.format(obj.id))
+        obj = self.data['obj']
+
+        self.scheduler.remove_job('MsgMass_Job_{}'.format(obj['id']))
         self.scheduler.add_job(msgmass_run(), 'date',
-                               run_date=UtilTime().timestamp_to_arrow(obj.sendtime).datetime,
-                               id='MsgMass_Job_{}'.format(obj.id),
+                               run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
+                               id='MsgMass_Job_{}'.format(obj['id']),
                                kwargs={
                                    "url": "{}/v1/api/wechat/AccMsgMass_Send".format(
                                        self.application.settings.get("busiServer")),
                                    "data": {
                                        "data": {
-                                           "id": obj.id,
+                                           "id": obj['id'],
                                        }
                                    }
                                })
