@@ -5,7 +5,7 @@ from loguru import logger
 from utils.exceptions import PubErrorCustom,InnerErrorCustom
 from utils.http.response import HttpResponse
 from utils.aes import decrypt,encrypt
-from utils.database import MysqlPool
+# from utils.database import MysqlPool
 
 # import tornado.httputil.HttPHeaders
 
@@ -79,11 +79,11 @@ class Core_connector:
 
     async def __run(self, func, outside_self, *args, **kwargs):
 
-        if self.isTransaction:
-            async with MysqlPool().get_conn.atomic_async():
-                res = await func(outside_self, *args, **kwargs)
-        else:
-            res = await func(outside_self, *args, **kwargs)
+        # if self.isTransaction:
+        #     async with MysqlPool().get_conn.atomic_async():
+        #         res = await func(outside_self, *args, **kwargs)
+        # else:
+        res = await func(outside_self, *args, **kwargs)
 
         if not isinstance(res, dict):
             res = {'data': None, 'msg': None, 'header': None}
