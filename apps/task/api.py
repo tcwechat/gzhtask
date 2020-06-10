@@ -270,5 +270,6 @@ class MsgMass(BaseHandler):
 
     @Core_connector(isTransaction=True,isTicket=False)
     async def delete(self, *args, **kwargs):
+        print(self.data)
         self.scheduler.remove_job('MsgMass_Job_{}'.format(self.data['id']))
 
