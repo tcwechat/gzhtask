@@ -7,6 +7,7 @@ from apps.task.task import follow_run,reply_run,msgcustomer_run,msgmould_run,msg
 
 from utils.exceptions import PubErrorCustom
 from loguru import logger
+import apscheduler
 
 class Follow(BaseHandler):
 
@@ -167,7 +168,10 @@ class MsgCustomer(BaseHandler):
 
         obj = self.data['obj']
 
-        self.scheduler.remove_job('MsgCustomer_Job_{}'.format(obj['id']))
+        try:
+            self.scheduler.remove_job('MsgCustomer_Job_{}'.format(obj['id']))
+        except apscheduler.jobstores.base.JobLookupError:
+            pass
         self.scheduler.add_job(msgcustomer_run, 'date',
                                run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
                                id='MsgCustomer_Job_{}'.format(obj['id']),
@@ -181,9 +185,12 @@ class MsgCustomer(BaseHandler):
                                    }
                                })
 
-    @Core_connector(isTransaction=True,isTicket=False)
+    @Core_connector(isTicket=False)
     async def delete(self, *args, **kwargs):
-        self.scheduler.remove_job('MsgCustomer_Job_{}'.format(self.data['id']))
+        try:
+            self.scheduler.remove_job('MsgCustomer_Job_{}'.format(self.data['id']))
+        except apscheduler.jobstores.base.JobLookupError:
+            pass
 
 class MsgMould(BaseHandler):
 
@@ -210,7 +217,10 @@ class MsgMould(BaseHandler):
 
         obj = self.data['obj']
 
-        self.scheduler.remove_job('MsgMould_Job_{}'.format(obj['id']))
+        try:
+            self.scheduler.remove_job('MsgMould_Job_{}'.format(obj['id']))
+        except apscheduler.jobstores.base.JobLookupError:
+            pass
         self.scheduler.add_job(msgmould_run, 'date',
                                run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
                                id='MsgMould_Job_{}'.format(obj['id']),
@@ -226,7 +236,10 @@ class MsgMould(BaseHandler):
 
     @Core_connector(isTransaction=True,isTicket=False)
     async def delete(self, *args, **kwargs):
-        self.scheduler.remove_job('MsgMould_Job_{}'.format(self.data['id']))
+        try:
+            self.scheduler.remove_job('MsgMould_Job_{}'.format(self.data['id']))
+        except apscheduler.jobstores.base.JobLookupError:
+            pass
 
 
 class MsgMass(BaseHandler):
@@ -254,7 +267,10 @@ class MsgMass(BaseHandler):
 
         obj = self.data['obj']
 
-        self.scheduler.remove_job('MsgMass_Job_{}'.format(obj['id']))
+        try:
+            self.scheduler.remove_job('MsgMass_Job_{}'.format(obj['id']))
+        except apscheduler.jobstores.base.JobLookupError:
+            pass
         self.scheduler.add_job(msgmass_run, 'date',
                                run_date=UtilTime().timestamp_to_arrow(obj['sendtime']).datetime,
                                id='MsgMass_Job_{}'.format(obj['id']),
@@ -268,8 +284,12 @@ class MsgMass(BaseHandler):
                                    }
                                })
 
-    @Core_connector(isTransaction=True,isTicket=False)
+    @Core_connector(isTicket=False)
     async def delete(self, *args, **kwargs):
         print(self.data)
-        self.scheduler.remove_job('MsgMass_Job_{}'.format(self.data['id']))
+        try:
+            self.scheduler.remove_job('MsgMass_Job_{}'.format(self.data['id']))
+        except apscheduler.jobstores.base.JobLookupError:
+            pass
+
 

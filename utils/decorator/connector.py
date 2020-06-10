@@ -49,7 +49,7 @@ class Core_connector:
         outside_self.data = None
 
         if self.isParams:
-            if outside_self.request.method in ['POST','PUT']:
+            if outside_self.request.method in ['POST','PUT','DELETE']:
                 outside_self.data = outside_self.get_body_argument("data",None)
                 if not outside_self.data:
                     outside_self.data = json.dumps(json.loads(outside_self.request.body.decode('utf-8')).get("data",None)) if outside_self.request.body \
@@ -58,8 +58,6 @@ class Core_connector:
                     outside_self.data='{}'
             elif outside_self.request.method == 'GET':
                 outside_self.data = outside_self.get_argument("data",None)
-            elif outside_self.request.method == 'DELETE':
-                outside_self.data='{}'
             else:
                 raise PubErrorCustom("拒绝访问!")
 
