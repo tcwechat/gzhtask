@@ -33,12 +33,12 @@ class Follow(BaseHandler):
                         }
                     }
                 })
-            if self.data['obj']['sendlimit'].split(",")[1] == 'H':
-                runTime = runTime.shift(hours=int(self.data['obj']['sendlimit'].split(",")[0]))
-            elif self.data['obj']['sendlimit'].split(",")[1] == 'M':
-                runTime = runTime.shift(minutes=int(self.data['obj']['sendlimit'].split(",")[0]))
-            elif self.data['obj']['sendlimit'].split(",")[1] == 'S':
-                runTime = runTime.shift(seconds=int(self.data['obj']['sendlimit'].split(",")[0]))
+            if self.data['obj']['send_limit'].split(",")[1] == 'H':
+                runTime = runTime.shift(hours=int(self.data['obj']['send_limit'].split(",")[0]))
+            elif self.data['obj']['send_limit'].split(",")[1] == 'M':
+                runTime = runTime.shift(send_limit=int(self.data['obj']['send_limit'].split(",")[0]))
+            elif self.data['obj']['send_limit'].split(",")[1] == 'S':
+                runTime = runTime.shift(seconds=int(self.data['obj']['send_limit'].split(",")[0]))
 
         return None
 
@@ -112,12 +112,12 @@ class Reply(BaseHandler):
                                                }
                                            }
                                        })
-                if self.data['obj']['sendlimit'].split(",")[1] == 'H':
-                    runTime = runTime.shift(hours=int(self.data['obj']['sendlimit'].split(",")[0]))
-                elif self.data['obj']['sendlimit'].split(",")[1] == 'M':
-                    runTime = runTime.shift(minutes=int(self.data['obj']['sendlimit'].split(",")[0]))
-                elif self.data['obj']['sendlimit'].split(",")[1] == 'S':
-                    runTime = runTime.shift(seconds=int(self.data['obj']['sendlimit'].split(",")[0]))
+                if self.data['obj']['send_limit'].split(",")[1] == 'H':
+                    runTime = runTime.shift(hours=int(self.data['obj']['send_limit'].split(",")[0]))
+                elif self.data['obj']['send_limit'].split(",")[1] == 'M':
+                    runTime = runTime.shift(minutes=int(self.data['obj']['send_limit'].split(",")[0]))
+                elif self.data['obj']['send_limit'].split(",")[1] == 'S':
+                    runTime = runTime.shift(seconds=int(self.data['obj']['send_limit'].split(",")[0]))
         elif self.data['obj']['send_type'] == '2':
             self.scheduler.add_job(reply_run, 'date',
                                    run_date=runTime.datetime,
