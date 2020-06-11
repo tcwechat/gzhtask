@@ -36,7 +36,7 @@ class Follow(BaseHandler):
             if self.data['obj']['send_limit'].split(",")[1] == 'H':
                 runTime = runTime.shift(hours=int(self.data['obj']['send_limit'].split(",")[0]))
             elif self.data['obj']['send_limit'].split(",")[1] == 'M':
-                runTime = runTime.shift(send_limit=int(self.data['obj']['send_limit'].split(",")[0]))
+                runTime = runTime.shift(minutes=int(self.data['obj']['send_limit'].split(",")[0]))
             elif self.data['obj']['send_limit'].split(",")[1] == 'S':
                 runTime = runTime.shift(seconds=int(self.data['obj']['send_limit'].split(",")[0]))
 
