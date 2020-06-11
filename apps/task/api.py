@@ -1,4 +1,5 @@
 
+import json
 from apps.base import BaseHandler
 from utils.time_st import UtilTime
 from utils.decorator.connector import Core_connector
@@ -18,7 +19,7 @@ class Follow(BaseHandler):
 
         runTime = ut.today.shift(seconds=5)
 
-        for item in self.data['obj']['listids']:
+        for item in json.loads(self.data['obj']['listids']):
             print(runTime.datetime)
             self.scheduler.add_job(follow_run, 'date',
                 run_date=runTime.datetime,
@@ -93,7 +94,7 @@ class Reply(BaseHandler):
                                    })
         elif self.data['obj']['send_type'] == '1':
 
-            for item in self.data['obj']['listids']:
+            for item in json.loads(self.data['obj']['listids']):
                 print(runTime.datetime)
                 self.scheduler.add_job(reply_run, 'date',
                                        run_date=runTime.datetime,
