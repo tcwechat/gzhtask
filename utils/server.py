@@ -10,6 +10,8 @@ from loguru import logger
 from router import urlpattern
 from config import common
 
+from tasks.task import add_task
+
 class Server(object):
 
     def __init__(self):
@@ -40,7 +42,7 @@ class Server(object):
         app.scheduler = TornadoScheduler()
         app.scheduler.start()
 
-        # add_task(self.scheduler)
+        add_task(app.scheduler)
 
     def start(self):
         try:
