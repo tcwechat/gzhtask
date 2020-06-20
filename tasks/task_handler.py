@@ -8,6 +8,6 @@ def AccCount():
 
     print(config_insert['common'])
 
-    response = request(method="POST",url="{}/v1/api/wechat/AccFollow_Send".format(config_insert['common'].get("busiServer")),json={"data":{}})
+    response = request(method="POST",url="{}/v1/api/wechat/AccCount_Handler".format(config_insert['common'].get("busiServer")),json={"data":{}})
 
     logger.info(response.text)
