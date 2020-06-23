@@ -6,9 +6,9 @@ from tasks.task_handler import AccCount
 def add_task(scheduler=None):
 
     scheduler.add_job(AccCount, 'cron',
-                      hour=0,
+                      hour=8,
                       minute=5,
-                      second=1)
+                      second=0)
 
 if __name__ == '__main__':
     import sys,os
