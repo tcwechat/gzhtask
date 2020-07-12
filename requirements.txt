@@ -4,6 +4,7 @@ peewee
 pymysql
 aiomysql
 aiofiles
+requests
 aioredis
 loguru
 redis-astra
